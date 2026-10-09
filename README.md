@@ -109,6 +109,7 @@ $$D = 1.80 \cos(45^\circ) + 1.80 \sin(45^\circ) \times 5.283 \approx 8.00 \text{
   3. Export surplus to grid at EDF OA Feed-in Tariff ($C_{inj} = 0.1301 \text{ €/kWh}$).
   4. Discharge BESS down to $10\%$ DoD before purchasing from grid under TOU pricing.
 
+---
 ### 6. BESS State-of-Charge Dynamics and Rule-Based EMS Dispatch Strategy
 
 The Battery Energy Storage System (Huawei LUNA2000, $E_{cap} = 10 \text{ kWh}$) operates on a 30-minute timestep ($\Delta t = 0.5 \text{ h}$) with charge/discharge efficiencies $\eta_{charge} = \eta_{discharge} = 95\%$ (round-trip efficiency $\approx 90\%$).
