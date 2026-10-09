@@ -166,6 +166,7 @@ $$NPV = -CAPEX + \sum_{t=1}^{20} \frac{S_t \cdot (1 + r_e)^{t-1} - (OPEX_t + M_t
 
 ---
 
+
 ## Repository Structure
 
 ```text
@@ -188,3 +189,13 @@ Sun-Chaser-Microgrid/
     ├── BDD_consomation/                        # Enedis profiling and load curve scripts
     ├── Interpolations_30M/                     # Solar geometry and irradiance interpolation
     └── TIPE_RESULT_36m2/                       # Physical 36m² PV array yields and Faiman thermal outputs
+```
+
+---
+
+## Author
+
+**El Abdaoui Haitam**  
+Engineering Student @ IMT Mines Albi | Renewable Energy & GreenTech  
+haitamelabdaoui@gmail.com
+[LinkedIn](https://www.linkedin.com/in/haitam-el-abdaoui-129296254)
