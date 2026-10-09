@@ -129,14 +129,14 @@ $$\mathrm{SoC}(t) = \mathrm{SoC}(t - \Delta t) + \frac{P_{\mathrm{batt}}(t) \cdo
 
 2. **Power Deficit ($\Delta P(t) < 0$) during Peak Hours (Heures Pleines)**:
    - **Priority 1 (BESS Discharging)**:
-     $P_{\mathrm{discharge}}(t) = \min\left(\frac{\vert{}\Delta P(t)\vert{}}{\eta_{\mathrm{discharge}}}, \, P_{\max,\mathrm{discharge}}, \, \frac{(\mathrm{SoC}(t - \Delta t) - \mathrm{SoC}_{\min}) \cdot E_{\mathrm{cap}}}{\Delta t}\right)$
-     where $\mathrm{SoC}_{\min} = 0.10$ ($10\%$ limit / $90\%$ Depth-of-Discharge).
+     $$P_{\text{discharge}}(t) = \min\left(\frac{\vert{}\Delta P(t)\vert{}}{\eta_{\text{discharge}}}, \, P_{\text{max,discharge}}, \, \frac{(\text{SoC}(t - \Delta t) - \text{SoC}_{\text{min}}) \cdot E_{\text{cap}}}{\Delta t}\right)$$
+     where $\text{SoC}_{\text{min}} = 0.10$ ($10\%$ limit / $90\%$ Depth-of-Discharge).
    - **Priority 2 (Grid Purchase)**: Any unfulfilled deficit is drawn from the Enedis grid under Time-of-Use (TOU) peak tariffs:
-     $P_{\mathrm{grid}}(t) = \vert{}\Delta P(t)\vert{} - P_{\mathrm{discharge}}(t) \cdot \eta_{\mathrm{discharge}}$
+     $$P_{\text{grid}}(t) = \vert{}\Delta P(t)\vert{} - P_{\text{discharge}}(t) \cdot \eta_{\text{discharge}}$$
 
 3. **Off-Peak Grid Charging Strategy (Heures Creuses - HC)**:
-   - **Off-Peak Tariff Arbitrage**: During scheduled low-cost night intervals ($t \in \text{HC}$, e.g., 02:00–06:00), if $\mathrm{SoC}(t - \Delta t) < \mathrm{SoC}_{\mathrm{target,HC}}$, the EMS charges the BESS directly from the grid at off-peak rates:
-     $P_{\mathrm{grid,HC}}(t) = \min\left(P_{\max,\mathrm{charge}}, \, \frac{(\mathrm{SoC}_{\mathrm{target,HC}} - \mathrm{SoC}(t - \Delta t)) \cdot E_{\mathrm{cap}}}{\Delta t \cdot \eta_{\mathrm{charge}}}\right)$
+   - **Off-Peak Tariff Arbitrage**: During scheduled low-cost night intervals ($t \in \text{HC}$, e.g., 02:00–06:00), if $\text{SoC}(t - \Delta t) < \text{SoC}_{\text{target,HC}}$, the EMS charges the BESS directly from the grid at off-peak rates:
+     $$P_{\text{grid,HC}}(t) = \min\left(P_{\text{max,charge}}, \, \frac{(\text{SoC}_{\text{target,HC}} - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t \cdot \eta_{\text{charge}}}\right)$$
    - **Peak Load Shaving**: Stores low-cost electricity overnight to cover high-cost morning consumption peaks.
 
 ---
@@ -151,6 +151,7 @@ $$\mathrm{SoC}(t) = \mathrm{SoC}(t - \Delta t) + \frac{P_{\mathrm{batt}}(t) \cdo
 $$NPV = -CAPEX + \sum_{t=1}^{20} \frac{S_t \cdot (1 + r_e)^{t-1} - (OPEX_t + M_t)}{(1 + d)^t}$$
 
 ---
+
 
 ## Repository Structure
 
@@ -174,3 +175,10 @@ Sun-Chaser-Microgrid/
     ├── BDD_consomation/                        # Enedis profiling and load curve scripts
     ├── Interpolations_30M/                     # Solar geometry and irradiance interpolation
     └── TIPE_RESULT_36m2/                       # Physical 36m² PV array yields and Faiman thermal outputs
+```
+---
+## Author
+
+**El Abdaoui Haitam**  
+Engineering Student @ IMT Mines Albi | Renewable Energy & GreenTech  
+[LinkedIn](https://www.linkedin.com/in/haitam-el-abdaoui-129296254)
