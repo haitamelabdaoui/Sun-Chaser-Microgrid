@@ -115,6 +115,7 @@ $$D = 1.80 \cos(45^\circ) + 1.80 \sin(45^\circ) \times 5.283 \approx 8.00 \text{
 The Battery Energy Storage System (Huawei LUNA2000, $E_{\text{cap}} = 10 \text{ kWh}$) operates on a 30-minute timestep ($\Delta t = 0.5 \text{ h}$) with charge/discharge efficiencies $\eta_{\text{charge}} = \eta_{\text{discharge}} = 0.95$ (round-trip efficiency $\approx 90\%$).
 
 #### State-of-Charge (SoC) Governing Equation
+
 $$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{\text{batt}}(t) \cdot \Delta t}{E_{\text{cap}}}$$
 
 #### Rule-Based EMS Dispatch Arbitration Algorithm
@@ -138,7 +139,6 @@ $$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{\text{batt}}(t) \cdot \Del
    - **Off-Peak Tariff Arbitrage**: During scheduled low-cost night intervals ($t \in \text{HC}$, e.g., 02:00–06:00), if $\text{SoC}(t - \Delta t) < \text{SoC}_{\text{target,HC}}$, the EMS charges the BESS directly from the grid at off-peak rates:
      $$P_{\text{grid,HC}}(t) = \min\left(P_{\text{max,charge}}, \, \frac{(\text{SoC}_{\text{target,HC}} - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t \cdot \eta_{\text{charge}}}\right)$$
    - **Peak Load Shaving**: Stores low-cost electricity overnight to cover high-cost morning consumption peaks.
-
 ---
 ### 7. 20-Year Financial Discounted Cash Flow Engine
 
