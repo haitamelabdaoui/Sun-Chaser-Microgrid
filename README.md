@@ -13,18 +13,18 @@
 
 ## Key Performance Summary
 
-| Metric / Parameter | Fixed PV System ($\alpha=180^\circ, \beta=45^\circ$) | Sun-Chaser Dual-Axis Tracker | Gain / Variation |
+| Metric / Parameter | Fixed PV System (α = 180°, β = 45°) | Sun-Chaser Dual-Axis Tracker | Gain / Variation |
 | :--- | :---: | :---: | :---: |
-| **Installed Capacity ($P_p$)** | $7.60 \text{ kWp}$ ($20 \times 380 \text{ W}$) | $7.60 \text{ kWp}$ ($20 \times 380 \text{ W}$) | — |
-| **Active Panel Area ($A_{pv}$)** | $36.0 \text{ m}^2$ | $36.0 \text{ m}^2$ | — |
-| **Incident Solar Energy ($E_{inc}$)** | $43.01 \text{ MWh/year}$ | $51.55 \text{ MWh/year}$ | **$+19.85\%$** |
-| **Net Electric Production ($E_{elec}$)** | $8.05 \text{ MWh/year}$ | $9.63 \text{ MWh/year}$ | **$+19.52\%$** ($+1,572 \text{ kWh/yr}$) |
-| **Annual Conversion Efficiency ($\eta_{annual}$)** | $18.73\%$ | $18.67\%$ | $-0.06\%$ |
-| **Performance Ratio ($PR$)** | $88.70\%$ | $88.46\%$ | $-0.24\%$ |
-| **CAPEX (PV + 10 kWh BESS)** | **€11,900** | **€15,100** | $+26.89\%$ |
-| **20-Year Net Present Value (NPV)** | **€16,023.50** | **€16,207.92** | **+$184.42** |
-| **Internal Rate of Return (IRR / TRI)** | **14.8%** | **11.2%** | $-3.6\%$ |
-| **Payback Period (PBP Actualisé)** | **8.0 Years** | **~9.1 Years** | $+1.1 \text{ Years}$ |
+| **Installed Capacity (P<sub>p</sub>)** | 7.60 kWp (20 × 380 W) | 7.60 kWp (20 × 380 W) | — |
+| **Active Panel Area (A<sub>pv</sub>)** | 36.0 m² | 36.0 m² | — |
+| **Incident Solar Energy (E<sub>inc</sub>)** | 43.01 MWh/year | 51.55 MWh/year | **+19.85%** |
+| **Net Electric Production (E<sub>elec</sub>)** | 8.05 MWh/year | 9.63 MWh/year | **+19.52%** (+1,572 kWh/yr) |
+| **Annual Conversion Efficiency (η<sub>annual</sub>)** | 18.73% | 18.67% | -0.06% |
+| **Performance Ratio (PR)** | 88.70% | 88.46% | -0.24% |
+| **CAPEX (PV + 10 kWh BESS)** | **€11,900** | **€15,100** | +26.89% |
+| **20-Year Net Present Value (NPV)** | **€16,023.50** | **€16,207.92** | **+€184.42** |
+| **Internal Rate of Return (IRR / TRI)** | **14.8%** | **11.2%** | -3.60% |
+| **Payback Period (PBP Actualisé)** | **8.0 Years** | **~9.1 Years** | +1.1 Years |
 
 ---
 
