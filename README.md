@@ -112,25 +112,27 @@ $$D = 1.80 \cos(45^\circ) + 1.80 \sin(45^\circ) \times 5.283 \approx 8.00 \text{
 ---
 ### 6. BESS State-of-Charge Dynamics and Rule-Based EMS Dispatch Strategy
 
-The Battery Energy Storage System (Huawei LUNA2000, $E_{cap} = 10 \text{ kWh}$) operates on a 30-minute timestep ($\Delta t = 0.5 \text{ h}$) with charge/discharge efficiencies $\eta_{charge} = \eta_{discharge} = 95\%$ (round-trip efficiency $\approx 90\%$).
+The Battery Energy Storage System (Huawei LUNA2000, $E_{\mathrm{cap}} = 10 \text{ kWh}$) operates on a 30-minute timestep ($\Delta t = 0.5 \text{ h}$) with charge/discharge efficiencies $\eta_{\mathrm{charge}} = \eta_{\mathrm{discharge}} = 0.95$ (round-trip efficiency $\approx 90\%$).
 
 #### State-of-Charge (SoC) Governing Equation
-$$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{batt}(t) \cdot \Delta t}{E_{cap}}$$
+$$\mathrm{SoC}(t) = \mathrm{SoC}(t - \Delta t) + \frac{P_{\mathrm{batt}}(t) \cdot \Delta t}{E_{\mathrm{cap}}}$$
 
 #### Rule-Based EMS Dispatch Arbitration Algorithm
+
 1. **Surplus Generation ($\Delta P(t) > 0$)**:
    - **Priority 1 (Self-Consumption)**: Direct load fulfillment.
    - **Priority 2 (BESS Charging)**:
-     $$P_{charge}(t) = \min\left(\Delta P(t) \cdot \eta_{charge}, \, P_{max,charge}, \, \frac{(\text{SoC}_{max} - \text{SoC}(t - \Delta t)) \cdot E_{cap}}{\Delta t}\right)$$
-     where $\text{SoC}_{max} = 100\%$.
-   - **Priority 3 (Grid Injection)**: Any remaining surplus power $P_{inject}(t) = \Delta P(t) - \frac{P_{charge}(t)}{\eta_{charge}}$ is exported to the grid at the EDF OA Feed-in Tariff ($C_{inj} = 0.1301 \text{ €/kWh}$).
+     $$P_{\mathrm{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\mathrm{charge}}, \, P_{\max,\mathrm{charge}}, \, \frac{(1 - \mathrm{SoC}(t - \Delta t)) \cdot E_{\mathrm{cap}}}{\Delta t}\right)$$
+     where $\mathrm{SoC}_{\max} = 1.0$ ($100\%$).
+   - **Priority 3 (Grid Injection)**: Any remaining surplus power is exported to the grid at EDF OA Feed-in Tariff ($C_{\mathrm{inj}} = 0.1301 \text{ €/kWh}$):
+     $$P_{\mathrm{inject}}(t) = \Delta P(t) - \frac{P_{\mathrm{charge}}(t)}{\eta_{\mathrm{charge}}}$$
 
 2. **Power Deficit ($\Delta P(t) < 0$)**:
    - **Priority 1 (BESS Discharging)**:
-     $$P_{discharge}(t) = \min\left(\frac{\vert{}\Delta P(t)\vert{}}{\eta_{discharge}}, \, P_{max,discharge}, \, \frac{(\text{SoC}(t - \Delta t) - \text{SoC}_{min}) \cdot E_{cap}}{\Delta t}\right)$$
-     where $\text{SoC}_{min} = 10\%$ ($90\%$ Depth-of-Discharge - DoD limit).
-   - **Priority 2 (Grid Purchase)**: Any unfulfilled deficit $P_{grid}(t) = \vert{}\Delta P(t)\vert{} - P_{discharge}(t) \cdot \eta_{discharge}$ is drawn from the Enedis grid under Time-of-Use (TOU) tariffs.
-
+     $$P_{\mathrm{discharge}}(t) = \min\left(\frac{|\Delta P(t)|}{\eta_{\mathrm{discharge}}}, \, P_{\max,\mathrm{discharge}}, \, \frac{(\mathrm{SoC}(t - \Delta t) - \mathrm{SoC}_{\min}) \cdot E_{\mathrm{cap}}}{\Delta t}\right)$$
+     where $\mathrm{SoC}_{\min} = 0.10$ ($10\%$ limit / $90\%$ Depth-of-Discharge).
+   - **Priority 2 (Grid Purchase)**: Any unfulfilled deficit is drawn from the Enedis grid under Time-of-Use (TOU) tariffs:
+     $$P_{\mathrm{grid}}(t) = |\Delta P(t)| - P_{\mathrm{discharge}}(t) \cdot \eta_{\mathrm{discharge}}$$
 ---
 
 ### 7. 20-Year Financial Discounted Cash Flow Engine
