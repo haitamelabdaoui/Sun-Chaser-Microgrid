@@ -197,5 +197,7 @@ Sun-Chaser-Microgrid/
 
 **El Abdaoui Haitam**  
 Engineering Student @ IMT Mines Albi | Renewable Energy & GreenTech  
+
 haitamelabdaoui@gmail.com
+
 [LinkedIn](https://www.linkedin.com/in/haitam-el-abdaoui-129296254)
