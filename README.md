@@ -120,25 +120,38 @@ $$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{\text{batt}}(t) \cdot \Del
 
 #### Rule-Based EMS Dispatch Arbitration Algorithm
 
-1. **Surplus Generation ($\Delta P(t) > 0$)**:
-   - **Priority 1 (Self-Consumption)**: Direct load fulfillment.
-   - **Priority 2 (BESS Charging)**:
-     $$P_{\text{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\text{charge}}, \, P_{\text{max,charge}}, \, \frac{(1 - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t}\right)$$
-     where $\text{SoC}_{\text{max}} = 1.0$ ($100\%$).
-   - **Priority 3 (Grid Injection)**: Any remaining surplus power is exported to the grid at EDF OA Feed-in Tariff ($C_{\text{inj}} = 0.1301 \text{ €/kWh}$):
-     $$P_{\text{inject}}(t) = \Delta P(t) - \frac{P_{\text{charge}}(t)}{\eta_{\text{charge}}}$$
+##### Case 1: Surplus Generation ($\Delta P(t) > 0$)
 
-2. **Power Deficit ($\Delta P(t) < 0$) during Peak Hours (Heures Pleines)**:
-   - **Priority 1 (BESS Discharging)**:
-     $$P_{\text{discharge}}(t) = \min\left(\frac{\vert{}\Delta P(t)\vert{}}{\eta_{\text{discharge}}}, \, P_{\text{max,discharge}}, \, \frac{(\text{SoC}(t - \Delta t) - \text{SoC}_{\text{min}}) \cdot E_{\text{cap}}}{\Delta t}\right)$$
-     where $\text{SoC}_{\text{min}} = 0.10$ ($10\%$ limit / $90\%$ Depth-of-Discharge).
-   - **Priority 2 (Grid Purchase)**: Any unfulfilled deficit is drawn from the Enedis grid under Time-of-Use (TOU) peak tariffs:
-     $$P_{\text{grid}}(t) = \vert{}\Delta P(t)\vert{} - P_{\text{discharge}}(t) \cdot \eta_{\text{discharge}}$$
+1. **Priority 1 — Self-Consumption**: Direct load fulfillment.
+2. **Priority 2 — BESS Charging**:
 
-3. **Off-Peak Grid Charging Strategy (Heures Creuses - HC)**:
-   - **Off-Peak Tariff Arbitrage**: During scheduled low-cost night intervals ($t \in \text{HC}$, e.g., 02:00–06:00), if $\text{SoC}(t - \Delta t) < \text{SoC}_{\text{target,HC}}$, the EMS charges the BESS directly from the grid at off-peak rates:
-     $$P_{\text{grid,HC}}(t) = \min\left(P_{\text{max,charge}}, \, \frac{(\text{SoC}_{\text{target,HC}} - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t \cdot \eta_{\text{charge}}}\right)$$
-   - **Peak Load Shaving**: Stores low-cost electricity overnight to cover high-cost morning consumption peaks.
+   $$P_{\text{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\text{charge}}, \, P_{\text{max,charge}}, \, \frac{(1 - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t}\right)$$
+
+   *Where $\text{SoC}_{\text{max}} = 1.0$ ($100\%$).*
+
+3. **Priority 3 — Grid Injection**: Any remaining surplus power is exported to the grid at EDF OA Feed-in Tariff ($C_{\text{inj}} = 0.1301 \text{ €/kWh}$):
+
+   $$P_{\text{inject}}(t) = \Delta P(t) - \frac{P_{\text{charge}}(t)}{\eta_{\text{charge}}}$$
+
+##### Case 2: Power Deficit ($\Delta P(t) < 0$) during Peak Hours (Heures Pleines)
+
+1. **Priority 1 — BESS Discharging**:
+
+   $$P_{\text{discharge}}(t) = \min\left(\frac{\vert{}\Delta P(t)\vert{}}{\eta_{\text{discharge}}}, \, P_{\text{max,discharge}}, \, \frac{(\text{SoC}(t - \Delta t) - \text{SoC}_{\text{min}}) \cdot E_{\text{cap}}}{\Delta t}\right)$$
+
+   *Where $\text{SoC}_{\text{min}} = 0.10$ ($10\%$ limit / $90\%$ Depth-of-Discharge).*
+
+2. **Priority 2 — Grid Purchase**: Any unfulfilled deficit is drawn from the Enedis grid under Time-of-Use (TOU) peak tariffs:
+
+   $$P_{\text{grid}}(t) = \vert{}\Delta P(t)\vert{} - P_{\text{discharge}}(t) \cdot \eta_{\text{discharge}}$$
+
+##### Case 3: Off-Peak Grid Charging Strategy (Heures Creuses - HC)
+
+1. **Off-Peak Tariff Arbitrage**: During scheduled low-cost night intervals ($t \in \text{HC}$, e.g., 02:00–06:00), if $\text{SoC}(t - \Delta t) < \text{SoC}_{\text{target,HC}}$, the EMS charges the BESS directly from the grid at off-peak rates:
+
+   $$P_{\text{grid,HC}}(t) = \min\left(P_{\text{max,charge}}, \, \frac{(\text{SoC}_{\text{target,HC}} - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t \cdot \eta_{\text{charge}}}\right)$$
+
+2. **Peak Load Shaving**: Stores low-cost electricity overnight to cover high-cost morning consumption peaks.
 
 ---
 
