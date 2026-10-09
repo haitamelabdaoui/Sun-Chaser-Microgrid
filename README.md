@@ -125,9 +125,7 @@ $$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{\text{batt}}(t) \cdot \Del
 1. **Priority 1 — Self-Consumption**: Direct load fulfillment.
 2. **Priority 2 — BESS Charging**:
 
-$$P_{\text{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\text{charge}}, \, P_{\text{max,charge}}, \, \frac{(1 - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t}\right)$$ 
-
-  *Where $\text{SoC}_{\text{max}} = 1.0$ ($100\%$).*
+$$P_{\text{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\text{charge}}, \, P_{\text{max,charge}}, \, \frac{(1 - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t}\right)$$  (*Where $\text{SoC}_{\text{max}} = 1.0$ ($100\%$).*)
 
 3. **Priority 3 — Grid Injection**: Any remaining surplus power is exported to the grid at EDF OA Feed-in Tariff ($C_{\text{inj}} = 0.1301 \text{ €/kWh}$):
 
