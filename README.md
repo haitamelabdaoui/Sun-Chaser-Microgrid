@@ -125,8 +125,9 @@ $$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{\text{batt}}(t) \cdot \Del
 1. **Priority 1 — Self-Consumption**: Direct load fulfillment.
 2. **Priority 2 — BESS Charging**:
 
-$$P_{\text{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\text{charge}}, \, P_{\text{max,charge}}, \, \frac{(1 - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t}\right)$$
-*Where $\text{SoC}_{\text{max}} = 1.0$ ($100\%$).*
+$$P_{\text{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\text{charge}}, \, P_{\text{max,charge}}, \, \frac{(1 - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t}\right)$$ 
+
+  *Where $\text{SoC}_{\text{max}} = 1.0$ ($100\%$).*
 
 3. **Priority 3 — Grid Injection**: Any remaining surplus power is exported to the grid at EDF OA Feed-in Tariff ($C_{\text{inj}} = 0.1301 \text{ €/kWh}$):
 
@@ -137,6 +138,7 @@ $$P_{\text{inject}}(t) = \Delta P(t) - \frac{P_{\text{charge}}(t)}{\eta_{\text{c
 1. **Priority 1 — BESS Discharging**:
 
 $$P_{\text{discharge}}(t) = \min\left(\frac{\vert{}\Delta P(t)\vert{}}{\eta_{\text{discharge}}}, \, P_{\text{max,discharge}}, \, \frac{(\text{SoC}(t - \Delta t) - \text{SoC}_{\text{min}}) \cdot E_{\text{cap}}}{\Delta t}\right)$$
+
 *Where $\text{SoC}_{\text{min}} = 0.10$ ($10\%$ limit / $90\%$ Depth-of-Discharge).*
 
 2. **Priority 2 — Grid Purchase**: Any unfulfilled deficit is drawn from the Enedis grid under Time-of-Use (TOU) peak tariffs:
