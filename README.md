@@ -109,9 +109,30 @@ $$D = 1.80 \cos(45^\circ) + 1.80 \sin(45^\circ) \times 5.283 \approx 8.00 \text{
   3. Export surplus to grid at EDF OA Feed-in Tariff ($C_{inj} = 0.1301 \text{ €/kWh}$).
   4. Discharge BESS down to $10\%$ DoD before purchasing from grid under TOU pricing.
 
+### 6. BESS State-of-Charge Dynamics and Rule-Based EMS Dispatch Strategy
+
+The Battery Energy Storage System (Huawei LUNA2000, $E_{cap} = 10 \text{ kWh}$) operates on a 30-minute timestep ($\Delta t = 0.5 \text{ h}$) with charge/discharge efficiencies $\eta_{charge} = \eta_{discharge} = 95\%$ (round-trip efficiency $\approx 90\%$).
+
+#### State-of-Charge (SoC) Governing Equation
+$$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{batt}(t) \cdot \Delta t}{E_{cap}}$$
+
+#### Rule-Based EMS Dispatch Arbitration Algorithm
+1. **Surplus Generation ($\Delta P(t) > 0$)**:
+   - **Priority 1 (Self-Consumption)**: Direct load fulfillment.
+   - **Priority 2 (BESS Charging)**:
+     $$P_{charge}(t) = \min\left(\Delta P(t) \cdot \eta_{charge}, \, P_{max,charge}, \, \frac{(\text{SoC}_{max} - \text{SoC}(t - \Delta t)) \cdot E_{cap}}{\Delta t}\right)$$
+     where $\text{SoC}_{max} = 100\%$.
+   - **Priority 3 (Grid Injection)**: Any remaining surplus power $P_{inject}(t) = \Delta P(t) - \frac{P_{charge}(t)}{\eta_{charge}}$ is exported to the grid at the EDF OA Feed-in Tariff ($C_{inj} = 0.1301 \text{ €/kWh}$).
+
+2. **Power Deficit ($\Delta P(t) < 0$)**:
+   - **Priority 1 (BESS Discharging)**:
+     $$P_{discharge}(t) = \min\left(\frac{\vert{}\Delta P(t)\vert{}}{\eta_{discharge}}, \, P_{max,discharge}, \, \frac{(\text{SoC}(t - \Delta t) - \text{SoC}_{min}) \cdot E_{cap}}{\Delta t}\right)$$
+     where $\text{SoC}_{min} = 10\%$ ($90\%$ Depth-of-Discharge - DoD limit).
+   - **Priority 2 (Grid Purchase)**: Any unfulfilled deficit $P_{grid}(t) = \vert{}\Delta P(t)\vert{} - P_{discharge}(t) \cdot \eta_{discharge}$ is drawn from the Enedis grid under Time-of-Use (TOU) tariffs.
+
 ---
 
-### 6. 20-Year Financial Discounted Cash Flow Engine
+### 7. 20-Year Financial Discounted Cash Flow Engine
 
 - **Discount Rate (WACC)**: $d = 4.0\%$
 - **Electricity Price Inflation**: $r_e = 3.0\% / \text{year}$
