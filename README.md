@@ -149,7 +149,7 @@ $$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{\text{batt}}(t) \cdot \Del
 
 1. **Off-Peak Tariff Arbitrage**: During scheduled low-cost night intervals ($t \in \text{HC}$, e.g., 02:00–06:00), if $\text{SoC}(t - \Delta t) < \text{SoC}_{\text{target,HC}}$, the EMS charges the BESS directly from the grid at off-peak rates:
 
-   $$P_{\text{grid,HC}}(t) = \min\left(P_{\text{max,charge}}, \, \frac{(\text{SoC}_{\text{target,HC}} - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t \cdot \eta_{\text{charge}}}\right)$$
+$$P_{\text{grid,HC}}(t) = \min\left(P_{\text{max,charge}}, \, \frac{(\text{SoC}_{\text{target,HC}} - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t \cdot \eta_{\text{charge}}}\right)$$
 
 2. **Peak Load Shaving**: Stores low-cost electricity overnight to cover high-cost morning consumption peaks.
 
