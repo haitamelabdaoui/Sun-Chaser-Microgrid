@@ -112,27 +112,27 @@ $$D = 1.80 \cos(45^\circ) + 1.80 \sin(45^\circ) \times 5.283 \approx 8.00 \text{
 
 ### 6. BESS State-of-Charge Dynamics and Rule-Based EMS Dispatch Strategy
 
-The Battery Energy Storage System (Huawei LUNA2000, $E_{\mathrm{cap}} = 10 \text{ kWh}$) operates on a 30-minute timestep ($\Delta t = 0.5 \text{ h}$) with charge/discharge efficiencies $\eta_{\mathrm{charge}} = \eta_{\mathrm{discharge}} = 0.95$ (round-trip efficiency $\approx 90\%$).
+The Battery Energy Storage System (Huawei LUNA2000, $E_{\text{cap}} = 10 \text{ kWh}$) operates on a 30-minute timestep ($\Delta t = 0.5 \text{ h}$) with charge/discharge efficiencies $\eta_{\text{charge}} = \eta_{\text{discharge}} = 0.95$ (round-trip efficiency $\approx 90\%$).
 
 #### State-of-Charge (SoC) Governing Equation
-$$\mathrm{SoC}(t) = \mathrm{SoC}(t - \Delta t) + \frac{P_{\mathrm{batt}}(t) \cdot \Delta t}{E_{\mathrm{cap}}}$$
+$$\text{SoC}(t) = \text{SoC}(t - \Delta t) + \frac{P_{\text{batt}}(t) \cdot \Delta t}{E_{\text{cap}}}$$
 
 #### Rule-Based EMS Dispatch Arbitration Algorithm
 
 1. **Surplus Generation ($\Delta P(t) > 0$)**:
    - **Priority 1 (Self-Consumption)**: Direct load fulfillment.
    - **Priority 2 (BESS Charging)**:
-     $P_{\mathrm{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\mathrm{charge}}, \, P_{\max,\mathrm{charge}}, \, \frac{(1 - \mathrm{SoC}(t - \Delta t)) \cdot E_{\mathrm{cap}}}{\Delta t}\right)$
-     where $\mathrm{SoC}_{\max} = 1.0$ ($100\%$).
-   - **Priority 3 (Grid Injection)**: Any remaining surplus power is exported to the grid at EDF OA Feed-in Tariff ($C_{\mathrm{inj}} = 0.1301 \text{ €/kWh}$):
-     $P_{\mathrm{inject}}(t) = \Delta P(t) - \frac{P_{\mathrm{charge}}(t)}{\eta_{\mathrm{charge}}}$
+     $$P_{\text{charge}}(t) = \min\left(\Delta P(t) \cdot \eta_{\text{charge}}, \, P_{\text{max,charge}}, \, \frac{(1 - \text{SoC}(t - \Delta t)) \cdot E_{\text{cap}}}{\Delta t}\right)$$
+     where $\text{SoC}_{\text{max}} = 1.0$ ($100\%$).
+   - **Priority 3 (Grid Injection)**: Any remaining surplus power is exported to the grid at EDF OA Feed-in Tariff ($C_{\text{inj}} = 0.1301 \text{ €/kWh}$):
+     $$P_{\text{inject}}(t) = \Delta P(t) - \frac{P_{\text{charge}}(t)}{\eta_{\text{charge}}}$$
 
 2. **Power Deficit ($\Delta P(t) < 0$) during Peak Hours (Heures Pleines)**:
    - **Priority 1 (BESS Discharging)**:
-     $$P_{\text{discharge}}(t) = \min\left(\frac{\vert{}\Delta P(t)\vert{}}{\eta_{\text{discharge}}}, \, P_{\text{max,discharge}}, \, \frac{(\text{SoC}(t - \Delta t) - \text{SoC}_{\text{min}}) \cdot E_{\text{cap}}}{\Delta t}\right)$$
+     $$P_{\text{discharge}}(t) = \min\left(\frac{|\Delta P(t)|}{\eta_{\text{discharge}}}, \, P_{\text{max,discharge}}, \, \frac{(\text{SoC}(t - \Delta t) - \text{SoC}_{\text{min}}) \cdot E_{\text{cap}}}{\Delta t}\right)$$
      where $\text{SoC}_{\text{min}} = 0.10$ ($10\%$ limit / $90\%$ Depth-of-Discharge).
    - **Priority 2 (Grid Purchase)**: Any unfulfilled deficit is drawn from the Enedis grid under Time-of-Use (TOU) peak tariffs:
-     $$P_{\text{grid}}(t) = \vert{}\Delta P(t)\vert{} - P_{\text{discharge}}(t) \cdot \eta_{\text{discharge}}$$
+     $$P_{\text{grid}}(t) = |\Delta P(t)| - P_{\text{discharge}}(t) \cdot \eta_{\text{discharge}}$$
 
 3. **Off-Peak Grid Charging Strategy (Heures Creuses - HC)**:
    - **Off-Peak Tariff Arbitrage**: During scheduled low-cost night intervals ($t \in \text{HC}$, e.g., 02:00–06:00), if $\text{SoC}(t - \Delta t) < \text{SoC}_{\text{target,HC}}$, the EMS charges the BESS directly from the grid at off-peak rates:
@@ -140,7 +140,6 @@ $$\mathrm{SoC}(t) = \mathrm{SoC}(t - \Delta t) + \frac{P_{\mathrm{batt}}(t) \cdo
    - **Peak Load Shaving**: Stores low-cost electricity overnight to cover high-cost morning consumption peaks.
 
 ---
-
 ### 7. 20-Year Financial Discounted Cash Flow Engine
 
 - **Discount Rate (WACC)**: $d = 4.0\%$
