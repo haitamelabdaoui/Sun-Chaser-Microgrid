@@ -4,7 +4,6 @@
 > *A high-resolution 30-minute simulation framework integrating thermodynamic cell modeling, dynamic Enedis load profiling, BESS dispatch, and 20-year financial viability analytics.*
 
 ---
-# Sun-Chaser-IoT
 
 ## The Story: Why We Built This?
 In two years of preparatory class, I spent a lot of time and energy into my TIPE project: optimizing the orientation of solar panels to maximize energy capture.
@@ -75,8 +74,7 @@ $$q_{pertes}(t) = (\alpha_{opt} - \eta_{STC}) \cdot G_{inc}(t) = U_L(t) \cdot \l
 Where total loss coefficient $U_L(t)$ combines convection, linearized radiation, and conduction:
 * **Convective Losses ($h_c$)**: Modeled via **Watmuff et al. (1977)** correlation:
   $$h_c(t) = a_c + b_c \cdot WS(t) \quad (a_c \approx 2.8 \text{ W/m}^2\text{K}, b_c \approx 3.0 \text{ W/m}^2\text{K}/(\text{m/s}))$$
-* **Radiative Losses ($h_r$)**: Linearized Stefan-Boltzmann law ($T_{\text{cell}}^4 - T_{\text{amb}}^4 \approx 4 T_m^3 (T_{\text{cell}} - T_{\text{amb}})$):
-  $$h_r = 4 \epsilon \sigma T_m^3 \approx 5.5 \text{ W/m}^2\text{K}$$
+* **Radiative Losses ($h_r$)**: Linearized Stefan-Boltzmann law ($T_{\mathrm{cell}}^4 - T_{\mathrm{amb}}^4 \approx 4 T_m^3 (T_{\mathrm{cell}} - T_{\mathrm{amb}})$): $h_r = 4\epsilon\sigma T_m^3 \approx 5.5 \text{ W/m}^2\text{K}$
 * **Conductive Losses ($h_{cond}$)**: $1.0 \text{ to } 2.0 \text{ W/m}^2\text{K}$ through frame and backing.
 
 #### Faiman Apparent Thermal Coefficients
