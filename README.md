@@ -4,6 +4,15 @@
 > *A high-resolution 30-minute simulation framework integrating thermodynamic cell modeling, dynamic Enedis load profiling, BESS dispatch, and 20-year financial viability analytics.*
 
 ---
+# Sun-Chaser-IoT
+
+## The Story: Why We Built This?
+In two years of preparatory class, I spent a lot of time and energy into my TIPE project: optimizing the orientation of solar panels to maximize energy capture.
+
+When I entered engineering school, I faced a choice. I could put all that hard work into a drawer and start something new, or I could take what I already built and make it better. 
+
+I believed that my previous work mattered. Using the new software and green tech skills learned during my first year of engineering studies, I decided to upgrade my physical prototype into a real, working IoT system.
+
 
 ## Research Question
 
@@ -66,7 +75,7 @@ $$q_{pertes}(t) = (\alpha_{opt} - \eta_{STC}) \cdot G_{inc}(t) = U_L(t) \cdot \l
 Where total loss coefficient $U_L(t)$ combines convection, linearized radiation, and conduction:
 * **Convective Losses ($h_c$)**: Modeled via **Watmuff et al. (1977)** correlation:
   $$h_c(t) = a_c + b_c \cdot WS(t) \quad (a_c \approx 2.8 \text{ W/m}^2\text{K}, b_c \approx 3.0 \text{ W/m}^2\text{K}/(\text{m/s}))$$
-* **Radiative Losses ($h_r$)**: Linearized Stefan-Boltzmann law ($T_{cell}^4 - T_{amb}^4 \approx 4 T_m^3 (T_{cell} - T_{amb})$):
+* **Radiative Losses ($h_r$)**: Linearized Stefan-Boltzmann law ($T_{\text{cell}}^4 - T_{\text{amb}}^4 \approx 4 T_m^3 (T_{\text{cell}} - T_{\text{amb}})$):
   $$h_r = 4 \epsilon \sigma T_m^3 \approx 5.5 \text{ W/m}^2\text{K}$$
 * **Conductive Losses ($h_{cond}$)**: $1.0 \text{ to } 2.0 \text{ W/m}^2\text{K}$ through frame and backing.
 
