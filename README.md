@@ -33,7 +33,7 @@ I believed that my previous work mattered. Using the new software and green tech
 | **CAPEX (PV + 10 kWh BESS)** | **€11,900** | **€15,100** | +26.89% |
 | **20-Year Net Present Value (NPV)** | **€16,023.50** | **€16,207.92** | **+€184.42** |
 | **Internal Rate of Return (IRR / TRI)** | **14.8%** | **11.2%** | -3.60% |
-| **Payback Period (PBP Actualisé)** | **8.0 Years** | **~9.1 Years** | +1.1 Years |
+| **Payback Period (PBP Actualisé)** | **8.0 Years** | **10 Years** | +1.1 Years |
 
 ---
 
